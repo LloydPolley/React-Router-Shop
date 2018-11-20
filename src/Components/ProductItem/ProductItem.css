@@ -1,0 +1,52 @@
+.product{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+.product .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.281);
+
+    opacity: 0;
+    transition: .2s ease all;
+}
+
+.product .overlay:hover{
+    opacity: 1;
+}
+.product .overlay .overlay-content{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.product .add-button{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.096);
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
+}
+.product .title{
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+    width: 50%;
+    text-align: left;
+    color: white;
+}
+
+.product img{
+    width: 100%;
+}

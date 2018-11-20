@@ -1,0 +1,10 @@
+
+.ProductListings{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.ProductListings .product{
+    flex-basis: 30%;
+}

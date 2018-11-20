@@ -1,0 +1,29 @@
+
+.basket-products{
+    height: 300px;
+    display: flex;
+    justify-content: space-between;   
+    border-top: 1px solid grey;
+}
+
+.basket-products *{
+    flex-basis: 20%;
+}
+
+.basket-products .box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.basket-products img{
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.basket-products button{
+    border: none;
+}

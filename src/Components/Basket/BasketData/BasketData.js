@@ -16,4 +16,4 @@ let BasketData = {
 }
 
 
-export default BasketData;
+export default BasketData; 

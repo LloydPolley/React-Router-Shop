@@ -18,6 +18,7 @@ class ProductListing extends Component {
   componentWillMount = async () => {
     let response = await fetch("https://jsonplaceholder.typicode.com/photos?_limit=12");
     let jsonResponse = await response.json();
+    
     this.setState({
       products: jsonResponse,
       loading: false

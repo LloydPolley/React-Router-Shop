@@ -21,9 +21,13 @@ class Basket extends Component {
     });
   };
 
-  removeItem = (e) => {
-    //BasketData.removeItem();
-    console.log(this.props.imgTitle);
+  removeItem = (product) => {
+    BasketData.removeItem(product);
+    let temp = BasketData.items;
+    this.setState({
+      productsAdded: temp
+    })
+    console.log(product);
   };
 
   render() {
@@ -36,7 +40,7 @@ class Basket extends Component {
               key={product.id}
               imgSrc={product.url}
               imgTitle={product.name}
-              removeItem={this.removeItem}
+              removeItem={((e) => this.removeItem(product.id))}
             />
           );
         })}

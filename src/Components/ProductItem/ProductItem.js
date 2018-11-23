@@ -26,10 +26,10 @@ class ProductItem extends Component {
   render() {
     return (
       <div className="product">
-        <img src={this.props.json.url} alt={this.props.json.title} />
+        <img src={this.props.product.url} alt={this.props.product.title} />
         <div className="overlay">
           <div className="overlay-content">
-            <p className="title">{this.props.json.title}</p>
+            <p className="title">{this.props.product.title}</p>
             <button className="add-button" onClick={this.addItem} title="Add to basket">{this.state.value}</button>
           </div>
         </div>

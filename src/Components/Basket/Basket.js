@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./Basket.css";
 
-import BasketProductItem from "../Basket/BasketProductItem/BasketProductItem";
-import BasketData from "./BasketData/BasketData";
+import BasketProductItem from "../BasketProductItem/BasketProductItem";
+import BasketData from "../BasketData/BasketData";
+
 
 class Basket extends Component {
   constructor(props) {
@@ -12,9 +13,9 @@ class Basket extends Component {
       totalCost: 0,
       numberOfItems: 0
     };
-  }
+  } 
 
-  componentWillMount = () => {
+  componentDidMount = () => {    
     let temp = BasketData.items;
     this.setState({
       productsAdded: temp
@@ -37,9 +38,8 @@ class Basket extends Component {
         {this.state.productsAdded.map(product => {
           return (
             <BasketProductItem
+              json={product}
               key={product.id}
-              imgSrc={product.url}
-              imgTitle={product.name}
               removeItem={((e) => this.removeItem(product.id))}
             />
           );

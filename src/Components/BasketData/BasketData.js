@@ -2,9 +2,11 @@
 let BasketData = {
   items: [],
   totalCost: 0,
-  addItem: function(id, name, url, albumId){
-    let newItem = {id ,name, url, albumId};
+  numberOfItems: 0,
+  addItem: function(json){
+    let newItem = {json};
     this.items.push(newItem);
+    this.numberOfItems++;
   },
   removeItem: function (product){
     for(var i = 0; i < this.items.length; i++){
@@ -12,6 +14,7 @@ let BasketData = {
         this.items.splice(i, 1);
       }
     }
+    this.numberOfItems--;
   }
 }
 

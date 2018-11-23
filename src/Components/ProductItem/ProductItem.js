@@ -11,10 +11,8 @@ class ProductItem extends Component {
     }
   }
   addItem = (e) => {
-    let keyId = this.props.keyId;
-    let title = this.props.imgTitle;
-    let imgUrl = this.props.imgSrc;
-    this.props.addItem(keyId, title, imgUrl);
+    let json = this.props.json;
+    this.props.addItem(json);
 
     this.setState({
       added: true,
@@ -22,17 +20,16 @@ class ProductItem extends Component {
     });
 
     console.log(this.state);
-    
   };
 
 
   render() {
     return (
       <div className="product">
-        <img src={this.props.imgSrc} alt={this.props.imgTitle} />
+        <img src={this.props.json.url} alt={this.props.json.title} />
         <div className="overlay">
           <div className="overlay-content">
-            <p className="title">{this.props.imgTitle}</p>
+            <p className="title">{this.props.json.title}</p>
             <button className="add-button" onClick={this.addItem} title="Add to basket">{this.state.value}</button>
           </div>
         </div>

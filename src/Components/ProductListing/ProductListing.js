@@ -2,49 +2,48 @@ import React, { Component } from "react";
 import "./ProductListing.css";
 
 import ProductItem from "../ProductItem/ProductItem";
-import BasketData from '../Basket/BasketData/BasketData';
+import BasketData from "../BasketData/BasketData";
 
+import { APIData, AppState } from "../APIData/APIData";
 
 class ProductListing extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      products: [],
-      loading: true
-    }
+      products: null,
+      loading: true,
+      numberOfItems: 0
+    };
   }
 
-  componentWillMount = async () => {
-    let response = await fetch("https://jsonplaceholder.typicode.com/photos?_limit=12");
-    let jsonResponse = await response.json();
-    
-    this.setState({
-      products: jsonResponse,
-      loading: false
-    });
-    console.log(this.state.products);
+  componentDidMount = async () => {
+    if (!window.products) {
+      let response = await APIData();
+      console.log(response)
+      window.products = response;
+      window.products.forEach(item => item.selected = false);
+    }
+
+    //Loop and check if boolean if true from API data
+    // setTimeout(() => {
+    //   console.log(AppState.data);
+    //   this.setState({
+    //     products: AppState.data,
+    //     loading: false
+    //   });
+    // }, 500);
   };
 
-  addItem = (id, title, url, albumId) => {
-    BasketData.addItem(id, title, url, albumId);
-    console.log(`Added ${title}`);
-  }
-
+  addItem = json => {
+    BasketData.addItem(json);
+  };
   render() {
     let content;
-    if(this.state.loading){
-      content = <h1>loading</h1>
-    } else{
-      content =this.state.products.map(product => {
-        return <ProductItem key={product.id} keyId={product.id} albumId={product.albumId} imgSrc={product.url} imgTitle={product.title} addItem={this.addItem}/>;
-      });
+    if (this.state.loading) {
+      content = <h1>loading</h1>;
     }
-    return (
-      <div className="ProductListings"> 
-        {content}
-      </div>
-    );
+    return <div className="ProductListings">{content}</div>;
   }
 }
 

@@ -18,6 +18,7 @@ class ProductListing extends Component {
   }
 
   componentDidMount = async () => {
+    console.log(window.products);
     if (!window.products) {
       let response = await APIData();
       console.log(response)
@@ -27,7 +28,12 @@ class ProductListing extends Component {
       this.setState({
         products: window.products,
         loading: false
-      })
+      });
+    } else{
+      this.setState({
+        products: window.products,
+        loading: false
+      });
     }
 
     //Loop and check if boolean if true from API data

@@ -1,10 +1,31 @@
-
-.ProductListings{
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+.ProductListings {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 
-.ProductListings .product{
-    flex-basis: 30%;
+.ProductListings .product {
+  flex-basis: 30%;
+}
+
+#loading-icon {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+
+  margin: 0 auto;
+
+  border: 10px solid lightgrey;
+  border-top: 10px solid blue;
+
+  animation: loading 1s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0turn);
+  }
+  100% {
+    transform: rotate(1turn);
+  }
 }

@@ -27,28 +27,19 @@ class Basket extends Component {
     let temp = BasketData.items;
     this.setState({
       productsAdded: temp
-    })
-    console.log(product);
+    });
   };
 
   render() {
-    return (
-      <div className="basket-container">
-      <h2 id="basket-title">Basket</h2>
-        {this.state.productsAdded.map(product => {
-          return (
-            <BasketProductItem
-              json={product}
-              key={product.id}
-              removeItem={((e) => this.removeItem(product.id))}
-            />
-          );
-        })}
-        <div className="totals">
-          
-        </div>
-      </div>
-    );
+    let content;
+    if (this.state.productsAdded.length === 0) {
+      content = <h1>Empty</h1>;
+    }else{
+      content = this.state.productsAdded.map(product => {
+        return <BasketProductItem key={product.key} product={product} removeItem={this.removeItem}/>
+      });
+    }
+    return <div className="basket-container"><h2 id="basket-title">Basket</h2>{content}</div>;
   }
 }
 

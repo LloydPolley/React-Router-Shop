@@ -98,7 +98,20 @@ class ProductListing extends Component {
         <div className="searchArea">
           <h2>Products</h2>
           <input id='searchInput' onChange={this.searchProducts}/>
-          <div id='searchSuggestions'></div>
+          <div id='searchSuggestions'>
+          {
+            suggestions = this.state.products.map(product => {
+              return (
+                <ProductItem
+                  className={window.products.classNames}
+                  key={product.key}
+                  product={product}
+                  addItem={e => this.addItem(product)}
+                />
+              );
+            })
+          }
+          </div>
         </div>
         <div className="ProductListings">
           {content}

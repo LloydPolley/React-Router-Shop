@@ -6,11 +6,13 @@ class ProductItem extends Component {
     super(props);
     this.state = {
       added: false,
+      searchFound: true
     }
   }
   componentWillMount = (e) => {
     this.setState({
-      added: window.products.selected
+      added: window.products.selected,
+      searchFound: window.products.searchFound
     });
 
     if(this.state.added === true){
@@ -20,19 +22,13 @@ class ProductItem extends Component {
 
   addItem = (e) => {
     let json = this.props.json;
-
     this.props.addItem(json);
-
     e.target.disabled = 'disabled';
 
     this.setState({
-      added: true,
+      added: true
     });
   };
-
-  addItemContent = () => {
-    this.addItem();
-  }
 
   render() {
     return (

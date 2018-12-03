@@ -68,7 +68,7 @@ class ProductListing extends Component {
     this.setState({
       products: productsAppear
     })
-    console.log(productsAppear);
+    //console.log(productsAppear);
   };
 
   

@@ -13,36 +13,49 @@ class SearchSuggest extends Component {
     };
   }
 
-  componentDidMount = async () => {
-    this.setState({
-
-    })
-  };
-
   searchProducts = (productSearch) => {
+    this.setState({
+      searchValue: productSearch.target.value
+    });
     //get current search results found
     let filteredProducts = window.products.filter(function(product) {
       let isTitleMatch = product.title.toLowerCase().includes(productSearch.target.value);
       return isTitleMatch;
     });
     this.props.search(filteredProducts);
+
+    if(productSearch.target.value.length < 2){
+      this.setState({
+        searchSuggestions: []
+      })
+    }else{
+      this.findSuggestions(filteredProducts);
+    }
   };
 
-  findSuggestions = () => {
-
+  findSuggestions = (currentSearch) => {
+    console.log(currentSearch);
+    this.setState({
+      searchSuggestions: currentSearch
+    })
   }
 
-  
+  selectSuggestion = (target) => {
+    console.log(target);
+    console.log(this.state.searchValue);
+
+    this.myTrim(target);
+
+    this.setState({
+      searchValue: target
+    });
+  }
 
   render() {
     let contents;
-
     contents = this.state.searchSuggestions.map(product => {
       return (
-        <li
-          key={product.key}
-          product={product}
-        ></li>
+        <li key={product.key} onClick={(e) => this.selectSuggestion(e.target.innerHTML)}> {product.title} </li>
       );
     })
     
@@ -50,7 +63,7 @@ class SearchSuggest extends Component {
       <div>
         <div className="searchArea">
           <h2>Products</h2>
-          <input id='searchInput' onChange={this.searchProducts}/>
+          <input id='searchInput' onChange={this.searchProducts} value={this.state.searchValue}/>
           <ul id='searchSuggestions'>
             {contents}
           </ul>

@@ -26,6 +26,32 @@
   top: 25px;
   border: 1px solid black;
   width: 20%;
+  z-index: 5;
+  background-color: white;
+}
+#searchSuggestions li{
+  border: 1px solid grey;
+  list-style: none;
+  list-style-type: none;
+  width: 100%;
+  transition: .1s;
+  animation: fadeIn .5s 1;
+  cursor: pointer;
+}
+#searchSuggestions li:hover{
+  background-color: rgb(235, 235, 235);
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: .5;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 
 

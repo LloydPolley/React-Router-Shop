@@ -3,6 +3,7 @@ import "./ProductListing.css";
 
 import ProductItem from "../ProductItem/ProductItem";
 import BasketData from "../BasketData/BasketData";
+import SearchSuggest from "../SearchSuggest/SearchSuggest";
 
 import { APIData } from "../APIData/APIData";
 
@@ -63,16 +64,11 @@ class ProductListing extends Component {
   };
 
 
-  searchProducts = (productSearch) => {
-    //get current search results found
-    let filteredProducts = window.products.filter(function(product) {
-      let isTitleMatch = product.title.toLowerCase().includes(productSearch.target.value);
-      return isTitleMatch;
-    });
+  searchProducts = (productsAppear) => {
     this.setState({
-      products: filteredProducts
+      products: productsAppear
     })
-    console.log(filteredProducts);
+    console.log(productsAppear);
   };
 
   
@@ -95,11 +91,7 @@ class ProductListing extends Component {
     }
     return (
       <div>
-        <div className="searchArea">
-          <h2>Products</h2>
-          <input id='searchInput' onChange={this.searchProducts}/>
-          <div id='searchSuggestions'></div>
-        </div>
+        <SearchSuggest products={this.state.products} search={this.searchProducts}/>
         <div className="ProductListings">
           {content}
         </div>

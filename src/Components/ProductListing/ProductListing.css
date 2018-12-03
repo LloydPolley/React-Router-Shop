@@ -1,8 +1,4 @@
-.ProductListings {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
+
 
 .ProductListings .product {
   flex-basis: 31.5%;
@@ -11,33 +7,25 @@
 .searchArea{
   display: flex;
   justify-content: space-between;
-
   margin-bottom: 1em;
+
+  position: relative;
 }
 .searchArea h2{
   margin: 0;
 }
 .searchArea input{
   width: 20%;
+  position: absolute;
+  right: 0;
+  height: 25px;
 }
-#loading-icon {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-
-  margin: 0 auto;
-
-  border: 10px solid lightgrey;
-  border-top: 10px solid blue;
-
-  animation: loading 1s infinite;
+#searchSuggestions{
+  position: absolute;
+  right: 0;
+  top: 25px;
+  border: 1px solid black;
+  width: 20%;
 }
 
-@keyframes loading {
-  0% {
-    transform: rotate(0turn);
-  }
-  100% {
-    transform: rotate(1turn);
-  }
-}
+

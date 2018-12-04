@@ -9,6 +9,8 @@ import Basket from './Components/Basket/Basket';
 import Nav from './Components/Nav/Nav';
 import Error from './Components/Error/Error';
 
+import Firebase from './Components/Firebase/Firebase';
+
 class App extends Component {
   render() {
     return (

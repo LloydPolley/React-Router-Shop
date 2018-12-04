@@ -5,7 +5,8 @@
 .navigation a{
     margin: 3em;
     text-decoration: none;
+    color: black;
 }
 .active{
-    color:red;
+    color:rgb(0, 0, 146) !important;
 }

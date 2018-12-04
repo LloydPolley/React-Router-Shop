@@ -80,7 +80,6 @@ class SearchSuggest extends Component {
       () => {
         console.log(this.getFilteredSearch(target));
         this.props.search(this.getFilteredSearch(target));
-        // this.resetDropDown(this.state.searchValue);
       }
     );
   };
@@ -95,14 +94,12 @@ class SearchSuggest extends Component {
   render() {
     let contents;
     //if this.state.searchSuggestion is below
-    console.log('length ',this.state.searchValue.length);
     if (this.state.searchValue.length >= 2) {
       contents = this.state.searchSuggestions.map(product => {
         return (
           <li
             key={product.key}
-            onClick={e => this.selectSuggestion(e.target.innerHTML)}
-          >
+            onClick={e => this.selectSuggestion(e.target.innerHTML)}>
             {product.title}
           </li>
         );
@@ -120,7 +117,6 @@ class SearchSuggest extends Component {
               placeholder="Search..."
               ref={this.searchInput}
             />
-            <button id='closeSearch' onClick={this.resetDropDown}>X</button>
             <ul id="searchSuggestions">{contents}</ul>
           </div>
         </div>

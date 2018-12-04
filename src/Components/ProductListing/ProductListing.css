@@ -1,11 +1,12 @@
 .ProductListings {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-around; */
   flex-wrap: wrap;
 }
 
 .ProductListings .product {
   flex-basis: 31.5%;
+  margin-right: 1.8%;
 }
 
 .searchArea{

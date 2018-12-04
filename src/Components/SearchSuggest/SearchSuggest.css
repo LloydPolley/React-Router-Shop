@@ -1,8 +1,4 @@
-.ProductListings {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
+
 
 .ProductListings .product {
   flex-basis: 31.5%;
@@ -11,33 +7,70 @@
 .searchArea{
   display: flex;
   justify-content: space-between;
-
   margin-bottom: 1em;
+
+  position: relative;
 }
 .searchArea h2{
   margin: 0;
 }
 .searchArea input{
-  width: 20%;
+  width: 100%;
+  border-radius: 10px;
+  border: none;
+  padding: .7em;
+  font-size: 1.5em;
+  background-color: rgb(247, 247, 247);
+  box-sizing: border-box;
 }
-#loading-icon {
-  height: 100px;
-  width: 100px;
+
+.searchInputAbso{
+  position: relative;
+  width: 50%;
+}
+
+#searchSuggestions{
+  position: absolute;
+  right: 0;
+  top: 100%;
+  width: 100%;
+  z-index: 5;
+  background-color: white;
+  padding: 0;
+  text-align: left;
   border-radius: 50%;
-
-  margin: 0 auto;
-
-  border: 10px solid lightgrey;
-  border-top: 10px solid blue;
-
-  animation: loading 1s infinite;
+}
+#searchSuggestions li{
+  border-bottom: 1px solid grey;
+  background-color: rgb(250, 250, 250);
+  list-style: none;
+  list-style-type: none;
+  width: 100%;
+  transition: .1s;
+  /* animation: fadeIn .5s 1; */
+  cursor: pointer;
+  padding: 1em;
+  box-sizing: border-box;
+}
+#searchSuggestions li:hover{
+  background-color: rgb(235, 235, 235);
+}
+#closeSearch{
+  position: absolute;
+  left: 0;
+  top: 100%;
 }
 
-@keyframes loading {
-  0% {
-    transform: rotate(0turn);
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
   }
-  100% {
-    transform: rotate(1turn);
+  50%{
+    opacity: .5;
+  }
+  100%{
+    opacity: 1;
   }
 }
+
+

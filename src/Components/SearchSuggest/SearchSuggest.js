@@ -1,72 +1,128 @@
 import React, { Component } from "react";
 import "./SearchSuggest.css";
 
-import ProductItem from "../ProductItem/ProductItem";
-
-
 class SearchSuggest extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchValue: '',
+      searchValue: "",
       searchSuggestions: []
     };
+    this.searchInput = React.createRef();
+    this.setWrapperRef = this.setWrapperRef.bind(this);
   }
 
-  searchProducts = (productSearch) => {
-    this.setState({
-      searchValue: productSearch.target.value
-    });
-    //get current search results found
-    let filteredProducts = window.products.filter(function(product) {
-      let isTitleMatch = product.title.toLowerCase().includes(productSearch.target.value);
-      return isTitleMatch;
-    });
-    this.props.search(filteredProducts);
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
 
-    if(productSearch.target.value.length < 2){
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  setWrapperRef = (node)  => {
+    this.wrapperRef = node;
+  }
+
+  handleClickOutside = (event) => {
+    if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+      console.log('Close drop down');
       this.setState({
         searchSuggestions: []
       })
-    }else{
-      this.findSuggestions(filteredProducts);
+    }
+  }
+
+  searchProducts = productSearch => {
+    let data;
+    this.setState(
+      {
+        searchValue: productSearch.target.value
+      },
+      () => {
+        data = this.getFilteredSearch(this.state.searchValue);
+        console.log("data", data);
+        this.props.search(data);
+        this.findSuggestions(data);
+        console.log(this.state.searchSuggestions.length);
+      }
+    );
+    if (productSearch.target.value.length === 0) {
+      console.log("search empty");
     }
   };
 
-  findSuggestions = (currentSearch) => {
-    console.log(currentSearch);
+  getFilteredSearch = inputType => {
+    console.log("input type: ", inputType);
+    let filteredProducts;
+    filteredProducts = window.products.filter(product => {
+      let isTitleMatch = product.title.toLowerCase().includes(inputType);
+      return isTitleMatch;
+    });
+
+    return filteredProducts;
+  };
+
+  //Saves
+  findSuggestions = currentSearch => {
+    console.log("current search", currentSearch);
     this.setState({
       searchSuggestions: currentSearch
-    })
-  }
-
-  selectSuggestion = (target) => {
-    console.log(target);
-    console.log(this.state.searchValue);
-
-    this.myTrim(target);
-
-    this.setState({
-      searchValue: target
     });
-  }
+  };
+
+  selectSuggestion = target => {
+    this.setState(
+      {
+        searchValue: target,
+        searchSuggestions: []
+      },
+      () => {
+        console.log(this.getFilteredSearch(target));
+        this.props.search(this.getFilteredSearch(target));
+        // this.resetDropDown(this.state.searchValue);
+      }
+    );
+  };
+
+  resetDropDown = () => {
+    this.setState({
+      searchValue: ""
+    });
+    this.props.search(window.products);
+  };
 
   render() {
     let contents;
-    contents = this.state.searchSuggestions.map(product => {
-      return (
-        <li key={product.key} onClick={(e) => this.selectSuggestion(e.target.innerHTML)}> {product.title} </li>
-      );
-    })
-    
+    //if this.state.searchSuggestion is below
+    console.log('length ',this.state.searchValue.length);
+    if (this.state.searchValue.length >= 2) {
+      contents = this.state.searchSuggestions.map(product => {
+        return (
+          <li
+            key={product.key}
+            onClick={e => this.selectSuggestion(e.target.innerHTML)}
+          >
+            {product.title}
+          </li>
+        );
+      });
+    }
     return (
-      <div>
+      <div className="searchComponent">
         <div className="searchArea">
           <h2>Products</h2>
-          <input id='searchInput' onChange={this.searchProducts} value={this.state.searchValue}/>
-          <ul id='searchSuggestions'>
-            {contents}
-          </ul>
+          <div className="searchInputAbso" ref={this.setWrapperRef}>
+            <input
+              id="searchInput"
+              onChange={this.searchProducts}
+              value={this.state.searchValue}
+              placeholder="Search..."
+              ref={this.searchInput}
+            />
+            <button id='closeSearch' onClick={this.resetDropDown}>X</button>
+            <ul id="searchSuggestions">{contents}</ul>
+          </div>
         </div>
       </div>
     );

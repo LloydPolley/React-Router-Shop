@@ -67,11 +67,8 @@ class ProductListing extends Component {
   searchProducts = (productsAppear) => {
     this.setState({
       products: productsAppear
-    })
-    //console.log(productsAppear);
+    });
   };
-
-  
 
   render() {
     let content;
